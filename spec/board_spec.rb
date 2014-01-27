@@ -15,29 +15,29 @@ let(:board) {Board.new(player)}
 	end
 
 	it "should know what's at any co-ordinates" do
-			expect(board.check_coords("A7")).to eq(" ")
-			expect(board.check_coords("A8")).to eq(" ")
-			expect(board.check_coords("A9")).to eq("s")
-			expect(board.check_coords("A10")).to eq("s")
+			expect(board.check_coords([0,6])).to eq(" ")
+			expect(board.check_coords([0,7])).to eq(" ")
+			expect(board.check_coords([0,8])).to eq("s")
+			expect(board.check_coords([0,9])).to eq("s")
 	end
 
-	it "should be case insensitive in recognising co-ordinates" do
-			expect(board.check_coords("a7")).to eq(" ")
-			expect(board.check_coords("a8")).to eq(" ")
-			expect(board.check_coords("a9")).to eq("s")
-			expect(board.check_coords("a10")).to eq("s")
-	end
+	# it "should be case insensitive in recognising co-ordinates" do
+	# 		expect(board.check_coords("a7")).to eq(" ")
+	# 		expect(board.check_coords("a8")).to eq(" ")
+	# 		expect(board.check_coords("a9")).to eq("s")
+	# 		expect(board.check_coords("a10")).to eq("s")
+	# end
 
   it "should be able to set the value at particular co-ordinates" do
-  	expect(board.check_coords("A1")).to eq(" ")
-  	board.set_value_at_coords("o", "A1")
-  	expect(board.check_coords("A1")).to eq("o")
+  	expect(board.check_coords([0,0])).to eq(" ")
+  	board.set_value_at_coords("o", [0,0])
+  	expect(board.check_coords([0,0])).to eq("o")
   end
 
   it "should be able to shoot a ship" do
-  	expect(board.check_coords("A9")).to eq("s")
+  	expect(board.check_coords([0,8])).to eq("s")
   	board.register_shot "A9"
-  	expect(board.check_coords("A9")).to eq("x")
+  	expect(board.check_coords([0,8])).to eq("x")
   end
 
   it "should return the opponent's view, with ships removed" do
@@ -54,5 +54,11 @@ let(:board) {Board.new(player)}
 			       [" "," "," "," "," "," "," "," "," "," "]
 			     ])
   end
+
+  # context "(when trying to place ships)" do
+  #   it "should know if a given stretch of water is clear" do
+  #     expect(board.is_water_clear?(3, "A1", :east)).to be_true
+  #   end
+  # end
 
 end

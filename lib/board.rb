@@ -19,20 +19,21 @@ class Board
 						}
 	end
 
-	def check_coords coords
-		x, y = convert_coords(coords)
+	def check_coords coords_array
+		x, y = coords_array
 		@rows[y][x]
 	end
 
-	def set_value_at_coords value, coords
-		x, y = convert_coords(coords)
+	def set_value_at_coords value, coords_array
+		x, y = coords_array
 		@rows[y][x] = value
 	end
 
 	def register_shot at_coordinates
-		old_value = check_coords at_coordinates
-		set_value_at_coords("o", at_coordinates) if old_value == " "
-		set_value_at_coords("x", at_coordinates) if old_value == "s"			
+		converted_coordinates = convert_coords(at_coordinates)
+		old_value = check_coords(converted_coordinates)
+		set_value_at_coords("o", converted_coordinates) if old_value == " "
+		set_value_at_coords("x", converted_coordinates) if old_value == "s"			
 	end
 
 	def convert_coords coords
@@ -52,4 +53,20 @@ class Board
 	def rows
 		@rows
 	end
+
+	# def is_water_clear?(ship_length, at_coordinates, direction)
+	# 	if direction == :north
+
+	# 	elsif direction == :east
+	# 		ship_length.times do |i|
+	# 			check_coords(at_coordinates)
+	# 		end
+	# 	elsif direction == :south
+
+	# 	elsif direction == :west
+
+	# 	else
+	# 		"panic"
+	# 	end
+	# end
 end

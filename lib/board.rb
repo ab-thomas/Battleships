@@ -91,22 +91,32 @@ class Board
 	def is_water_clear?(ship_length, at_coordinates, direction)
 		x,y = at_coordinates
 		ship = Array.new(ship_length) { " " }
-		if direction == :east
-			comparison_array = @rows[y].slice(x...(x + ship_length))
-		elsif direction == :south
-			comparison_array = ship.inject([]) do |array, co| 
-				y += 1
-				@rows[y-1].nil? ? array << "nil" : array << @rows[y-1][x]
-			end
-		elsif direction == :west
-			comparison_array = @rows[y].slice((x-ship_length+1)..x)
-		elsif direction == :north
-			comparison_array = ship.inject([]) do |array, co| 
+		comparison_array = is_east_clear?(ship_length,x,y) if direction == :east
+		comparison_array = is_west_clear?(ship_length,x,y) if direction == :west
+		comparison_array = is_north_clear?(ship_length,x,y,ship) if direction == :north
+		comparison_array = is_south_clear?(ship_length,x,y) if direction == :south
+		ship == comparison_array
+	end
+
+	def is_east_clear? ship_length, x, y
+		@rows[y].slice(x...(x + ship_length))
+	end
+
+	def is_west_clear? ship_length, x, y
+		@rows[y].slice((x-ship_length+1)..x)
+	end
+
+	def is_south_clear? ship_length, x, y
+		array = []
+		ship_length.times { |i| @rows[y+i].nil? ? array << "nil" : array << @rows[y+i][x] }
+		array
+	end
+
+	def is_north_clear? ship_length, x, y, ship
+		ship.inject([]) do |array, co| 
 				y -= 1
 				@rows[y+1].nil? ? array << "nil" : array << @rows[y+1][x]
 			end
-		end
-		ship == comparison_array
 	end
 
 end

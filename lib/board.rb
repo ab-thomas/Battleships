@@ -20,7 +20,6 @@ class Board
 	end
 
 	def add_a_ship length
-
 		x, y, direction = random_start
 		while !is_water_clear?(length, [x,y], direction)
 			x, y, direction = random_start
@@ -116,32 +115,31 @@ class Board
 	def is_water_clear?(ship_length, at_coordinates, direction)
 		x,y = at_coordinates
 		ship = Array.new(ship_length) { " " }
-		comparison_array = is_east_clear?(ship_length,x,y) if direction == :east
-		comparison_array = is_west_clear?(ship_length,x,y) if direction == :west
-		comparison_array = is_north_clear?(ship_length,x,y,ship) if direction == :north
-		comparison_array = is_south_clear?(ship_length,x,y) if direction == :south
+		comparison_array = array_eastward(ship_length,x,y) if direction == :east
+		comparison_array = array_westward(ship_length,x,y) if direction == :west
+		comparison_array = array_northward(ship_length,x,y) if direction == :north
+		comparison_array = array_southward(ship_length,x,y) if direction == :south
 		ship == comparison_array
 	end
 
-	def is_east_clear? ship_length, x, y
+	def array_eastward ship_length, x, y
 		@rows[y].slice(x...(x + ship_length))
 	end
 
-	def is_west_clear? ship_length, x, y
+	def array_westward ship_length, x, y
 		@rows[y].slice((x-ship_length+1)..x)
 	end
 
-	def is_south_clear? ship_length, x, y
+	def array_southward ship_length, x, y
 		array = []
 		ship_length.times { |i| @rows[y+i].nil? ? array << "nil" : array << @rows[y+i][x] }
 		array
 	end
 
-	def is_north_clear? ship_length, x, y, ship
-		ship.inject([]) do |array, co| 
-				y -= 1
-				@rows[y+1].nil? ? array << "nil" : array << @rows[y+1][x]
-			end
+	def array_northward ship_length, x, y
+		(0...ship_length).inject([]) do |array, i| 
+			@rows[y+i].nil? ? array << "nil" : array << @rows[y+i][x]
+		end
 	end
 
 end

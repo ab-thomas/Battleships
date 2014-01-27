@@ -124,5 +124,36 @@ let(:board) {Board.new(player)}
 			       ["s"," "," "," "," "," "," "," "," "," "]
 			     ])
   end
+  
+  it "should be able to test it's OK to, and place a ship at given co-ordinates" do 
+
+    expect(board.is_water_clear?(5,[0,0],:south)).to eq(true)
+    board.place_ship(5,"a1",:south)
+    expect(board.rows).to eq([
+			       ["s"," "," "," "," "," "," ","s","s","s"],
+			       ["s"," "," "," "," "," "," "," "," "," "],
+			       ["s"," "," "," "," "," "," "," "," "," "],
+			       ["s"," ","s"," "," "," "," "," "," "," "],
+			       ["s"," ","s"," "," "," "," "," "," "," "],
+			       [" "," ","s"," "," "," "," "," "," "," "],
+			       [" "," "," "," "," "," "," "," "," "," "],
+			       [" "," "," "," "," "," "," "," "," "," "],
+			       ["s"," "," "," "," "," "," "," "," "," "],
+			       ["s"," "," "," "," "," "," "," "," "," "]
+			     ])
+  end
+
+  it "should return two co-ordinates, 0-10, and a direction" do 
+
+  	a,b,c = board.random_start
+  	puts "#{a}  #{b}  #{c}"
+
+  end
+
+
+
+
+
+  
 
 end

@@ -19,37 +19,22 @@ class Board
 						}
 	end
 
+	def add_a_ship length
+
+		x, y, direction = random_start
+		while !is_water_clear?(length, [x,y], direction)
+			x, y, direction = random_start
+		end
+		place_ship(length, [x,y], direction)
+	end
+
 	def populate
-		x, y, direction = random_start
-		while !is_water_clear?(5, [x,y], direction)
-			x, y, direction = random_start
-		end
-		place_ship(5, [x,y], direction)
 
-		x, y, direction = random_start
-		while !is_water_clear?(4, [x,y], direction)
-			x, y, direction = random_start
-		end
-		place_ship(4, [x,y], direction)
-
-		x, y, direction = random_start
-		while !is_water_clear?(3, [x,y], direction)
-			x, y, direction = random_start
-		end
-		place_ship(3, [x,y], direction)
-
-		x, y, direction = random_start
-		while !is_water_clear?(3, [x,y], direction)
-			x, y, direction = random_start
-		end
-		place_ship(3, [x,y], direction)
-
-		x, y, direction = random_start
-		while !is_water_clear?(2, [x,y], direction)
-			x, y, direction = random_start
-		end
-		place_ship(2, [x,y], direction)
-
+		add_a_ship 5
+		add_a_ship 4
+		add_a_ship 3
+		add_a_ship 3
+		add_a_ship 2
 	end
 
 	def clear

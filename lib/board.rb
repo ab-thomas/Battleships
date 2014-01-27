@@ -79,6 +79,7 @@ class Board
 			@rows[y][x-4] = "s" if length > 4	
 		end
 	end
+
 	def owner
 		@player.name
 	end
@@ -96,6 +97,13 @@ class Board
 			comparison_array = ship.inject([]) do |array, co| 
 				y += 1
 				array << @rows[y-1][x]
+			end
+		elsif direction == :west
+			comparison_array = @rows[y].slice((x-ship_length+1)..x)
+		elsif direction == :north
+			comparison_array = ship.inject([]) do |array, co| 
+				y -= 1
+				array << @rows[y+1][x]
 			end
 		end
 		ship == comparison_array

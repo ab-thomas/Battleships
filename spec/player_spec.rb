@@ -6,14 +6,14 @@ describe Player do
   #let(:board) {Board.new}
 
   def clear_rows # This is terrible. Remove ASAP
-    player.board.set_value_at_coords(" ", "H1")
-    player.board.set_value_at_coords(" ", "I1")
-    player.board.set_value_at_coords(" ", "J1")
-    player.board.set_value_at_coords(" ", "C4")
-    player.board.set_value_at_coords(" ", "C5")
-    player.board.set_value_at_coords(" ", "C6")
-    player.board.set_value_at_coords(" ", "A9")
-    player.board.set_value_at_coords(" ", "A10")
+    player.board.set_value_at_coords(" ", [7,0])
+    player.board.set_value_at_coords(" ", [8,0])
+    player.board.set_value_at_coords(" ", [9,0])
+    player.board.set_value_at_coords(" ", [2,3])
+    player.board.set_value_at_coords(" ", [2,4])
+    player.board.set_value_at_coords(" ", [2,5])
+    player.board.set_value_at_coords(" ", [0,8])
+    player.board.set_value_at_coords(" ", [0,9])
   end
 
   it "there should be a player" do

@@ -41,6 +41,10 @@ class Board
 		[x, y]
 	end
 
+	def opponents_view
+		@rows.map {|a| a.map {|cell| cell == "s" ? " " : cell}}
+	end
+
 	def owner
 		@player.name
 	end

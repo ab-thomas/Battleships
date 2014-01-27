@@ -48,31 +48,35 @@ class Board
 
 	def place_ship length, coords, direction
 		x, y = convert_coords(coords)
-		case 
+		case direction
 		when :north 
-			@rows[x][y]   = "s"
-			@rows[x-1][y] = "s"
-			@rows[x-2][y] = "s" if length > 2
-			@rows[x-3][y] = "s" if length > 3
-			@rows[x-4][y] = "s" if length > 4	
+			puts 'north'
+			@rows[y][x]   = "s"
+			@rows[y-1][x] = "s"
+			@rows[y-2][x] = "s" if length > 2
+			@rows[y-3][x] = "s" if length > 3
+			@rows[y-4][x] = "s" if length > 4	
 		when :south 
-			@rows[x][y]   = "s"
-			@rows[x+1][y] = "s"
-			@rows[x+2][y] = "s" if length > 2
-			@rows[x+3][y] = "s" if length > 3
-			@rows[x+4][y] = "s" if length > 4	
+			puts 'south'
+			@rows[y][x]   = "s"
+			@rows[y+1][x] = "s"
+			@rows[y+2][x] = "s" if length > 2
+			@rows[y+3][x] = "s" if length > 3
+			@rows[y+4][x] = "s" if length > 4	
 		when :east
-			@rows[x][y]   = "s"
-			@rows[x][y+1] = "s"
-			@rows[x][y+2] = "s" if length > 2
-			@rows[x][y+3] = "s" if length > 3
-			@rows[x][y+4] = "s" if length > 4	
+			puts 'east'
+			@rows[y][x]   = "s"
+			@rows[y][x+1] = "s"
+			@rows[y][x+2] = "s" if length > 2
+			@rows[y][x+3] = "s" if length > 3
+			@rows[y][x+4] = "s" if length > 4	
 		when :west
-			@rows[x][y]   = "s"
-			@rows[x][y-1] = "s"
-			@rows[x][y-2] = "s" if length > 2
-			@rows[x][y-3] = "s" if length > 3
-			@rows[x][y-4] = "s" if length > 4	
+			puts 'west'
+			@rows[y][x]   = "s"
+			@rows[y][x-1] = "s"
+			@rows[y][x-2] = "s" if length > 2
+			@rows[y][x-3] = "s" if length > 3
+			@rows[y][x-4] = "s" if length > 4	
 		end
 	end
 	def owner

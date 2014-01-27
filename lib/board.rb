@@ -45,6 +45,35 @@ class Board
 		@rows.map {|a| a.map {|cell| cell == "s" ? " " : cell}}
 	end
 
+	def place_ship length, coords, direction
+		x, y = convert_coords(coords)
+		case 
+		when :north 
+			@rows[x][y]   = "s"
+			@rows[x-1][y] = "s"
+			@rows[x-2][y] = "s" if length > 2
+			@rows[x-3][y] = "s" if length > 3
+			@rows[x-4][y] = "s" if length > 4	
+		when :south 
+			@rows[x][y]   = "s"
+			@rows[x+1][y] = "s"
+			@rows[x+2][y] = "s" if length > 2
+			@rows[x+3][y] = "s" if length > 3
+			@rows[x+4][y] = "s" if length > 4	
+		when :east
+			@rows[x][y]   = "s"
+			@rows[x][y+1] = "s"
+			@rows[x][y+2] = "s" if length > 2
+			@rows[x][y+3] = "s" if length > 3
+			@rows[x][y+4] = "s" if length > 4	
+		when :west
+			@rows[x][y]   = "s"
+			@rows[x][y-1] = "s"
+			@rows[x][y-2] = "s" if length > 2
+			@rows[x][y-3] = "s" if length > 3
+			@rows[x][y-4] = "s" if length > 4	
+		end
+	end
 	def owner
 		@player.name
 	end

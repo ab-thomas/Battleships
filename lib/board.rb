@@ -54,19 +54,18 @@ class Board
 		@rows
 	end
 
-	# def is_water_clear?(ship_length, at_coordinates, direction)
-	# 	if direction == :north
+	def is_water_clear?(ship_length, at_coordinates, direction)
+		x,y = at_coordinates
+		ship = Array.new(ship_length) { " " }
+		if direction == :east
+			comparison_array = @rows[y].slice(x...(x + ship_length))
+		elsif direction == :south
+			comparison_array = ship.inject([]) do |array, co| 
+				y += 1
+				array << @rows[y-1][x]
+			end
+		end
+		ship == comparison_array
+	end
 
-	# 	elsif direction == :east
-	# 		ship_length.times do |i|
-	# 			check_coords(at_coordinates)
-	# 		end
-	# 	elsif direction == :south
-
-	# 	elsif direction == :west
-
-	# 	else
-	# 		"panic"
-	# 	end
-	# end
 end

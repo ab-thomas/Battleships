@@ -54,10 +54,14 @@ let(:board) {Board.new(player)}
 			     ])
   end
 
-  # context "(when trying to place ships)" do
-  #   it "should know if a given stretch of water is clear" do
-  #     expect(board.is_water_clear?(3, [0,0], :east)).to be_true
-  #   end
-  # end
+  context "(when trying to place ships)" do
+    it "should know if a given eastward stretch of water is clear" do
+      expect(board.is_water_clear?(3, [0,0], :east)).to eq(true)
+    end
+
+    it "should know if a southward stretch of water is clear" do
+      expect(board.is_water_clear?(2, [1,3], :south)).to eq(true)
+    end
+  end
 
 end

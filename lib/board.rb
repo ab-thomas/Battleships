@@ -19,21 +19,17 @@ class Board
 						}
 	end
 
+	def populate
+		ship_lengths = [2,3,3,4,5]
+		ship_lengths.each { |ship_length| add_a_ship ship_length }
+	end
+
 	def add_a_ship length
 		x, y, direction = random_start
 		while !is_water_clear?(length, [x,y], direction)
 			x, y, direction = random_start
 		end
 		place_ship(length, [x,y], direction)
-	end
-
-	def populate
-
-		add_a_ship 5
-		add_a_ship 4
-		add_a_ship 3
-		add_a_ship 3
-		add_a_ship 2
 	end
 
 	def clear
@@ -112,8 +108,8 @@ class Board
 		@rows
 	end
 
-	def is_water_clear?(ship_length, at_coordinates, direction)
-		x,y = at_coordinates
+	def is_water_clear?(ship_length, coordinates, direction)
+		x,y = coordinates
 		ship = Array.new(ship_length) { " " }
 		comparison_array = array_eastward(ship_length,x,y) if direction == :east
 		comparison_array = array_westward(ship_length,x,y) if direction == :west
@@ -131,14 +127,14 @@ class Board
 	end
 
 	def array_southward ship_length, x, y
-		array = []
-		ship_length.times { |i| @rows[y+i].nil? ? array << "nil" : array << @rows[y+i][x] }
-		array
+		(0...ship_length).inject([]) do |array, i| 
+			@rows[y+i].nil? ? array << "nil" : array << @rows[y+i][x]
+		end
 	end
 
 	def array_northward ship_length, x, y
 		(0...ship_length).inject([]) do |array, i| 
-			@rows[y+i].nil? ? array << "nil" : array << @rows[y+i][x]
+			@rows[y-i].nil? ? array << "nil" : array << @rows[y-i][x]
 		end
 	end
 

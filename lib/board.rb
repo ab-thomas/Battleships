@@ -26,11 +26,17 @@ class Board
 
 	def set_value_at_coords value, coords
 		x, y = convert_coords(coords)
-		@rows[y][x] = "o"
+		@rows[y][x] = value
+	end
+
+	def register_shot at_coordinates
+		old_value = check_coords at_coordinates
+		set_value_at_coords("o", at_coordinates) if old_value == " "
+		set_value_at_coords("x", at_coordinates) if old_value == "s"			
 	end
 
 	def convert_coords coords
-		x = @x_axis[coords[0]]
+		x = @x_axis[coords[0].upcase]
 		y = coords.slice(1..-1).to_i - 1
 		[x, y]
 	end

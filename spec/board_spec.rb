@@ -85,7 +85,8 @@ let(:board) {Board.new(player)}
   end
 
   it "should be able to place a ship at given co-ordinates" do 
-    board.place_ship(5,"A1",:east)
+   # board.place_ship(5,"A1",:east)
+   board.place_ship(5,[0,0],:east)
     expect(board.rows).to eq([
 			       ["s","s","s","s","s"," "," ","s","s","s"],
 			       [" "," "," "," "," "," "," "," "," "," "],
@@ -100,7 +101,8 @@ let(:board) {Board.new(player)}
 			     ])
   end
   it "should be able to place a ship at given co-ordinates" do 
-    board.place_ship(4,"A1",:south)
+   # board.place_ship(4,"A1",:south)
+    board.place_ship(4,[0,0],:south)
     expect(board.rows).to eq([
 			       ["s"," "," "," "," "," "," ","s","s","s"],
 			       ["s"," "," "," "," "," "," "," "," "," "],
@@ -115,7 +117,8 @@ let(:board) {Board.new(player)}
 			     ])
   end
   it "should be able to place a ship at given co-ordinates" do 
-    board.place_ship(3,"d3",:west)
+   # board.place_ship(3,"d3",:west)
+   board.place_ship(3,[3,2],:west)
     expect(board.rows).to eq([
 			       [" "," "," "," "," "," "," ","s","s","s"],
 			       [" "," "," "," "," "," "," "," "," "," "],
@@ -130,7 +133,8 @@ let(:board) {Board.new(player)}
 			     ])
   end
   it "should be able to place a ship at given co-ordinates" do 
-    board.place_ship(2,"a3",:north)
+   # board.place_ship(2,"a3",:north)
+   board.place_ship(2,[0,2],:north)
     expect(board.rows).to eq([
 			       [" "," "," "," "," "," "," ","s","s","s"],
 			       ["s"," "," "," "," "," "," "," "," "," "],
@@ -148,7 +152,8 @@ let(:board) {Board.new(player)}
   it "should be able to test it's OK to, and place a ship at given co-ordinates" do 
 
     expect(board.is_water_clear?(5,[0,0],:south)).to eq(true)
-    board.place_ship(5,"a1",:south)
+   # board.place_ship(5,"a1",:south)
+   board.place_ship(5,[0,0],:south)
     expect(board.rows).to eq([
 			       ["s"," "," "," "," "," "," ","s","s","s"],
 			       ["s"," "," "," "," "," "," "," "," "," "],
@@ -164,10 +169,41 @@ let(:board) {Board.new(player)}
   end
 
   it "should return two co-ordinates, 0-10, and a direction" do 
-
   	a,b,c = board.random_start
   	puts "#{a}  #{b}  #{c}"
+  end
 
+  it "should clear board" do 
+  	expect(board.clear).to eq([
+			       [" "," "," "," "," "," "," "," "," "," "],
+			       [" "," "," "," "," "," "," "," "," "," "],
+			       [" "," "," "," "," "," "," "," "," "," "],
+			       [" "," "," "," "," "," "," "," "," "," "],
+			       [" "," "," "," "," "," "," "," "," "," "],
+			       [" "," "," "," "," "," "," "," "," "," "],
+			       [" "," "," "," "," "," "," "," "," "," "],
+			       [" "," "," "," "," "," "," "," "," "," "],
+			       [" "," "," "," "," "," "," "," "," "," "],
+			       [" "," "," "," "," "," "," "," "," "," "]
+			     ])
+  end
+
+  it "should add a ship" do 
+  	board.clear
+  	board.populate
+  	expect(board.rows).not_to eq([
+			       [" "," "," "," "," "," "," "," "," "," "],
+			       [" "," "," "," "," "," "," "," "," "," "],
+			       [" "," "," "," "," "," "," "," "," "," "],
+			       [" "," "," "," "," "," "," "," "," "," "],
+			       [" "," "," "," "," "," "," "," "," "," "],
+			       [" "," "," "," "," "," "," "," "," "," "],
+			       [" "," "," "," "," "," "," "," "," "," "],
+			       [" "," "," "," "," "," "," "," "," "," "],
+			       [" "," "," "," "," "," "," "," "," "," "],
+			       [" "," "," "," "," "," "," "," "," "," "]
+			     ])
+  	puts board.rows.inspect
   end
 
 

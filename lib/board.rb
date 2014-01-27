@@ -19,8 +19,44 @@ class Board
 						}
 	end
 
-	def random_start
+	def populate
+		x, y, direction = random_start
+		while !is_water_clear?(5, [x,y], direction)
+			x, y, direction = random_start
+		end
+		place_ship(5, [x,y], direction)
 
+		x, y, direction = random_start
+		while !is_water_clear?(4, [x,y], direction)
+			x, y, direction = random_start
+		end
+		place_ship(4, [x,y], direction)
+
+		x, y, direction = random_start
+		while !is_water_clear?(3, [x,y], direction)
+			x, y, direction = random_start
+		end
+		place_ship(3, [x,y], direction)
+
+		x, y, direction = random_start
+		while !is_water_clear?(3, [x,y], direction)
+			x, y, direction = random_start
+		end
+		place_ship(3, [x,y], direction)
+
+		x, y, direction = random_start
+		while !is_water_clear?(2, [x,y], direction)
+			x, y, direction = random_start
+		end
+		place_ship(2, [x,y], direction)
+
+	end
+
+	def clear
+			@rows = @rows.map {|a| a.map {|cell| " "}}
+	end
+
+	def random_start
 		@directions = [:north,:south,:east,:west]
 		@values = [0,1,2,3,4,5,6,7,8,9]
 		[@values.sample,@values.sample,@directions.sample]
@@ -54,7 +90,8 @@ class Board
 	end
 
 	def place_ship length, coords, direction
-		x, y = convert_coords(coords)
+		x, y = coords
+	
 		case direction
 		when :north 
 			puts 'north'

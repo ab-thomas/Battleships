@@ -1,22 +1,31 @@
 class Board
 	def initialize player
 		@player = player
-		#@rows = Array.new(10) { Array.new(10) { '' } }
+		# @rows = Array.new(10) { Array.new(10) { '' } }
 		@rows = [
-			       [" "," "," "," "," "," "," ","s","s","s"],
-			       [" "," "," "," "," "," "," "," "," "," "],
-			       [" "," "," "," "," "," "," "," "," "," "],
-			       [" "," ","s"," "," "," "," "," "," "," "],
-			       [" "," ","s"," "," "," "," "," "," "," "],
-			       [" "," ","s"," "," "," "," "," "," "," "],
-			       [" "," "," "," "," "," "," "," "," "," "],
-			       [" "," "," "," "," "," "," "," "," "," "],
-			       ["s"," "," "," "," "," "," "," "," "," "],
-			       ["s"," "," "," "," "," "," "," "," "," "]
-			     ]
-		@x_axis = { "A" => 0, "B" => 1, "C" => 2, "D" => 3,"E" => 4, "F" => 5,
-							"G" => 6, "H" => 7, "I" => 8, "J" => 9
-						}
+      [" "," "," "," "," "," "," ","s","s","s"],
+      [" "," "," "," "," "," "," "," "," "," "],
+      [" "," "," "," "," "," "," "," "," "," "],
+      [" "," ","s"," "," "," "," "," "," "," "],
+      [" "," ","s"," "," "," "," "," "," "," "],
+      [" "," ","s"," "," "," "," "," "," "," "],
+      [" "," "," "," "," "," "," "," "," "," "],
+      [" "," "," "," "," "," "," "," "," "," "],
+      ["s"," "," "," "," "," "," "," "," "," "],
+      ["s"," "," "," "," "," "," "," "," "," "]
+		]
+		@x_axis = { 
+			"A" => 0, "B" => 1, "C" => 2, "D" => 3,"E" => 4,
+			"F" => 5, "G" => 6, "H" => 7, "I" => 8, "J" => 9
+		}
+	end
+
+	def owner
+		@player.name
+	end
+
+	def rows
+		@rows
 	end
 
 	def populate
@@ -32,15 +41,15 @@ class Board
 		place_ship(length, [x,y], direction)
 	end
 
-	def clear
-			@rows = @rows.map {|a| a.map {|cell| " "}}
-	end
-
 	def random_start
 		@directions = [:north,:south,:east,:west]
 		@values = [0,1,2,3,4,5,6,7,8,9]
-		[@values.sample,@values.sample,@directions.sample]
+		[@values.sample, @values.sample, @directions.sample]
 	end	
+
+	def clear
+			@rows = @rows.map {|a| a.map {|cell| " "}}
+	end
 
 	def check_coords coords_array
 		x, y = coords_array
@@ -100,19 +109,11 @@ class Board
 		end
 	end
 
-	def owner
-		@player.name
-	end
-
-	def rows
-		@rows
-	end
-
 	def is_water_clear?(ship_length, coordinates, direction)
 		x,y = coordinates
 		ship = Array.new(ship_length) { " " }
-		comparison_array = array_eastward(ship_length,x,y) if direction == :east
-		comparison_array = array_westward(ship_length,x,y) if direction == :west
+		comparison_array = array_eastward(ship_length,x,y)  if direction == :east
+		comparison_array = array_westward(ship_length,x,y)  if direction == :west
 		comparison_array = array_northward(ship_length,x,y) if direction == :north
 		comparison_array = array_southward(ship_length,x,y) if direction == :south
 		ship == comparison_array

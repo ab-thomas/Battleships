@@ -35,12 +35,13 @@ describe Player do
     expect(player).not_to have_ships_still_floating
   end
 
+  it "should be able shoot at coordinates at opponents board" do
+    board = double :board
+    expect(board).to receive(:register_shot).with('A1')
+    player.shoot("A1", board)
+  end
+
 end
 
 
 
- # it "should be able to place a ship horizontally" do
-   #    ships = double :ships
-   #    ships.place_ships([a..l])
-   #    # expect(ships).to   
-   #  end

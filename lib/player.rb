@@ -14,7 +14,7 @@ attr_accessor :board
     rows_with_ships != 0 
   end
 
-  # def shoot(at_coordinates, opponent_board)
-      #  board.register_
-  # end
+  def shoot(at_coordinates, opponent_board)
+    opponent_board.register_shot(at_coordinates)
+  end
 end

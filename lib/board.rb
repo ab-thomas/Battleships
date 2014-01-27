@@ -79,28 +79,24 @@ class Board
 	
 		case direction
 		when :north 
-			puts 'north'
 			@rows[y][x]   = "s"
 			@rows[y-1][x] = "s"
 			@rows[y-2][x] = "s" if length > 2
 			@rows[y-3][x] = "s" if length > 3
 			@rows[y-4][x] = "s" if length > 4	
 		when :south 
-			puts 'south'
 			@rows[y][x]   = "s"
 			@rows[y+1][x] = "s"
 			@rows[y+2][x] = "s" if length > 2
 			@rows[y+3][x] = "s" if length > 3
 			@rows[y+4][x] = "s" if length > 4	
 		when :east
-			puts 'east'
 			@rows[y][x]   = "s"
 			@rows[y][x+1] = "s"
 			@rows[y][x+2] = "s" if length > 2
 			@rows[y][x+3] = "s" if length > 3
 			@rows[y][x+4] = "s" if length > 4	
 		when :west
-			puts 'west'
 			@rows[y][x]   = "s"
 			@rows[y][x-1] = "s"
 			@rows[y][x-2] = "s" if length > 2
